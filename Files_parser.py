@@ -87,8 +87,9 @@ def toggle_selector(event):
             df_new = df
             df_new['check'] = check
             df_final = df_new.loc[(df_new['check'] == True)]
+            df_final.drop(columns=['check'])
             label = str(int(ovals[i][0])) + "_" + str(int(ovals[i][1])) +".csv"
-            df_final.to_csv(label, index=False)
+            df_final.to_csv(label, index=False, sep = "\t")
             print(str((i+1)/len(ovals)*100) + '% finished')
 
 parser = argparse.ArgumentParser()
@@ -132,3 +133,4 @@ toggle_selector.ES = EllipseSelector(ax, line_select_callback,
                                        interactive=True)
 plt.connect('key_press_event', toggle_selector)
 plt.show()
+
